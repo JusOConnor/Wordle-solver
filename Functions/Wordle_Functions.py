@@ -1,5 +1,6 @@
 import random
 from collections import Counter
+import re
 
 Version = 6.1
 
@@ -146,3 +147,20 @@ def fGetRandom(wordlist):
     if not for_random:
         for_random = wordlist  # fallback if filter is too aggressive
     print(f'Next Word: {random.choice(for_random)}')
+
+# This section cleans the BlackLetter variable removing all letter that appears in the Yellow or Red string
+def fPassVariables(b, y, g):
+    # Removes letter indexes
+    y = [l for l in y if l.isalpha()]
+    g = [l for l in g if l.isalpha()]
+    # Combines Yellow and Green strings into SET and uses RE.SUB to loop through the LIST SET and substitutes it with a '' in the b variable
+    b = re.sub(f"[{''.join(set(y + g))}]", '', b)
+    return str(b)
+
+# This cleans the variables and scrubs the list
+def fLoop(black, yellow, green, word_list):
+    black = fPassVariables(black, yellow, green)
+    word_list = fRemoveBlackLetters(black, word_list)
+    word_list = fRemoveYellowLetters(yellow, word_list)
+    word_list = fRemoveGreeLetters(green, word_list)
+    return word_list
