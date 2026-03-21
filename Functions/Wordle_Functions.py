@@ -34,7 +34,7 @@ def fRandomWord(wl):
     print(f'Next Word: {wl[sw]}')
 
 # This only works with the 'Word List.csv' file and lines up with the puzzle number.  
-# The puzzle nuber increments by 1 each day so technically you can find the curent and future puzzle answers knowing the previous date/s answer
+# The puzzle nuber increments by 1 each day so technically you can find the curent and future puzzle answers knowing the previous date/s answer and using it to find the index on the wordlist
 def fPuzzleAnswer(puzzleNo):
     fl = fImportList('Word List')
     print(f'Answer: {fl[puzzleNo]}')
@@ -48,10 +48,8 @@ def fRemove_from_list(to_be_deleted, original):
 
 # This section's logic is specific to the black letters. It loops through each letter and word removing all words containing the black letter from the list
 def fRemoveBlackLetters(black_letters, word_list):
-    # Handles the blank list logic
     if not black_letters:
         return word_list
-    # SET conversion was done to speed up the process
     wordlist = set(word_list)
     wordlist_to_delete = []
     #Identifies the words with any of the identified black letter
@@ -63,10 +61,8 @@ def fRemoveBlackLetters(black_letters, word_list):
 
 # This section's logic is specific to the yellow letters. The first pass removes all words where the yellow letter and index matches the word. The second pass removes all the words that do not contain one of the yellow letters.  The third pass reduces the list to only words with all the yellow letters.
 def fRemoveYellowLetters(yellow_letters, word_list):
-    # Handles the blank list logic
     if not yellow_letters:
         return word_list
-    # SET conversion was done to speed up the process
     wordlist = set(word_list)
     # The upper was added to normalize the data between the two list files and account for data entry in case users preferred to enter in lower case vs upper case
     # ISALPHA was used to remove the "index" number from the yellow_letters vaiable
@@ -98,12 +94,10 @@ def fRemoveYellowLetters(yellow_letters, word_list):
         return words_to_return
     for i in yllist:
         new_list = fValidWordsY(i,new_list)
-    # Returns a list of words that contain ALL the yellow letters
     return new_list
 
 # This section's logic is speific to the green letters.  
 def fRemoveGreeLetters(green_letters, word_list):
-    # Handles the blank list logic
     if not green_letters:
         return word_list
     wordlist = set(word_list)
@@ -122,7 +116,6 @@ def fRemoveGreeLetters(green_letters, word_list):
         # This "resets" the list by remove the first two items.'a1b2c3' becomes 'b2c3'.  This simplifies the previous logic where alpha and number indexes remains the same for each loop without having to additional logic.
         green_letters = green_letters[2:]
     print(f'Words Remaining: {len(wordlist)}') 
-    # Returns all words with the matching letter/index 
     return wordlist
 
 # This is the 6.1 version of the random word.
@@ -150,7 +143,6 @@ def fGetRandom(wordlist):
 
 # This section cleans the BlackLetter variable removing all letter that appears in the Yellow or Red string
 def fPassVariables(b, y, g):
-    # Removes letter indexes
     y = [l for l in y if l.isalpha()]
     g = [l for l in g if l.isalpha()]
     if not g:
