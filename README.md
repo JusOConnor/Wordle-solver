@@ -32,3 +32,8 @@ This originally started as project to learn how to work with data in Python.  Th
 
 6. **Generate list of words from combined list** \
     This loads both word lists into the word_list variable.  Please note, this will override the previously generated word_list
+
+<br> \
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/JusOConnor) \
+[If you like my work or if you found this at all helpful please feel free to contribute.](buymeacoffee.com/JusOConnor) \
+buymeacoffee.com/JusOConnor
